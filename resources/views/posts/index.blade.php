@@ -15,6 +15,7 @@
             <th></th>
             </thead>
             <tbody>
+
             @foreach($posts as $post)
                 <tr>
 
@@ -27,11 +28,12 @@
                     <td>{{date('M j, Y', strtotime($post->created_at )) }}</td>
 
                     <td>
-                        <a href="{{ route('post.show', $post->id) }}" class="btn btn-default">View Post</a>
-                        <a href="{{ route('post.edit', $post->id) }}" class="btn btn-default">Edit</a>
+                        <a href="{{ route('posts.show', $post->id) }}" class="btn btn-default">View Post</a>
+                        <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-default">Edit</a>
                     </td>
                 </tr>
             @endforeach
+
             </tbody>
         </table>
     </div>
