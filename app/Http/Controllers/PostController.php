@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Post;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Post;
 
 class PostController extends Controller
 {
@@ -40,13 +40,14 @@ class PostController extends Controller
         //validate data
         $this->validate($request, array(
             'title' => 'required|max:255',
-            'body'  => 'required'
-           // TO DO -> 'post_author' =>
+            'body'  => 'required',
         ));
         //store in db
         $post = new Post;
+
         $post->title = $request->title;
         $post->body = $request->body;
+
         $post->save();
 
         return redirect()->route('posts.show', $post->id);
@@ -62,7 +63,7 @@ class PostController extends Controller
     public function show($id)
     {
         $post = Post::find($id);
-        return view('post.show')->withPost($post);
+        return view('posts.show')->withPost($post);
     }
 
     /**

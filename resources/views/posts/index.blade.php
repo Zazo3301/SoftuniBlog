@@ -29,7 +29,6 @@
                     <td>
                         <a href="{{ route('post.show', $post->id) }}" class="btn btn-default">View Post</a>
                         <a href="{{ route('post.edit', $post->id) }}" class="btn btn-default">Edit</a>
-
                     </td>
                 </tr>
             @endforeach
