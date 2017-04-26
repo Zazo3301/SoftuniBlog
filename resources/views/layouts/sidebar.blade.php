@@ -9,8 +9,8 @@
  		<div class="tab-pane active" id="login">
  			<div class="login-box-body">
  				<p class="login-box-msg">Sign in</p>
-					
- 				<form  method="POST" action="{{ route('login') }}" role="form">
+
+ 				<form  method="POST"  role="form">
  					{{ csrf_field() }}
  					<div class="form-group has-feedback{{ $errors->has('email') ? ' has-error' : '' }}">
  						<input  id="email" type="email" class="form-control" name="email" value="{{ old('email') }} " placeholder="Email" required autofocus>
@@ -47,10 +47,10 @@
 
  				<!-- /.social-auth-links -->
 
- 				<a class="btn btn-link" href="{{ route('password.request') }}">
+ 				<a class="btn btn-link" ">
  					Forgot Your Password?
  				</a><br>
- 				<a class="btn btn-link" href="{{ route('password.request') }}">
+ 				<a class="btn btn-link">
  					Register
  				</a>
  			</div>
@@ -101,7 +101,7 @@
                                             Logout
                                         </a>
 
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        <form id="logout-form" action="" method="POST" style="display: none;">
                                             {{ csrf_field() }}
                                         </form>
             </div>
