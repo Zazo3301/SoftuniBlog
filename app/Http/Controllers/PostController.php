@@ -100,7 +100,7 @@ class PostController extends Controller
 
         $post->save();
 
-        return redirect()->route('posts.show', $post->id);
+        return redirect()->route('admin.edit-posts', $post->id);
     }
 
     /**
@@ -111,6 +111,10 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = Post::find($id);
+
+        $post->delete();
+
+        return redirect()->route('posts.index');
     }
 }
