@@ -50,4 +50,5 @@ Route::resource('posts', 'PostController');
 
 Auth::routes();
 
+
 Route::get('/home', 'HomeController@index');

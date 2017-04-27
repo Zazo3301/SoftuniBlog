@@ -49,6 +49,7 @@ class PostController extends Controller
         $this->validate($request, array(
             'title' => 'required|max:255',
             'body'  => 'required',
+            'featured' => 'sometimes|image'
         ));
         //store in db
         $post = new Post;
@@ -62,7 +63,7 @@ class PostController extends Controller
             $filename = time(). '.' . $image->getClientOriginalExtension();
             $location = public_path('images/' . $filename);
 
-            Img::make($image)->resize(800, 400)->save($location);
+            Img::make($image)->save($location);
 
             $post->image = $filename;
         }
@@ -116,7 +117,7 @@ class PostController extends Controller
 
         $post->save();
 
-        return redirect()->route('admin.edit-posts', $post->id);
+        return redirect()->route('admin.edit-post');
     }
 
     /**
@@ -131,6 +132,6 @@ class PostController extends Controller
 
         $post->delete();
 
-        return redirect()->route('posts.index');
+        return redirect()->route('posts.edit');
     }
 }
