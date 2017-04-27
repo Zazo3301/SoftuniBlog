@@ -18,8 +18,9 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::orderBy('id', 'desc')->all();
-        return view('posts.edit')->withPosts($posts);
+        $posts = Post::all();
+
+        return view('admin.edit-posts')->withPosts($posts);
     }
 
     public function data() {

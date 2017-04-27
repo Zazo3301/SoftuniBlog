@@ -53,58 +53,37 @@
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-        <span><a href="/posts/create"> a </a></span>
-        @foreach($posts as $post)
-            <?php
-            $num = 13
-            ?>
-            <div class="col-md-{{$num}}">
-                <div class="box-body">
-                    <div class="box box-widget">
-                        <div class="box-header with-border">
-                            <div class="user-block">
-                                {{date('M j, Y', strtotime($post->created_at )) }}
-                                <img class="img-circle " width="100" src="../dist/img/user1-128x128.jpg" alt="User Image">
+        <!DOCTYPE html>
+        <h1>
+            {{ $post->title }}
+        </h1>
+        <p class="lead">
+            {{$post->body}}
+        </p>
+        <img src="{{ asset('images/'. $post->image) }}">
 
-                                <div class="dropdown fixed-right navbar-collapse-right">
-                                    <i class="fa fa-angle-down"></i>
-                                    <div class="dropdown-content">
+        <p>created at:
+            {{ $post->created_at }}
+        </p>
+        <p>
+            updated at:
+            {{ $post->updated_at }}
+        </p>
+        <p>
 
-                                        <p>{!! Form::open(['route' => ['posts.destroy', $post->id], 'method' => 'DELETE']) !!}
+            {!! Html::linkRoute('posts.edit', 'Edit', array($post->id), array('class' => 'btn btn-primary btn-block')) !!}
 
-                                            {!! Form::submit('Delete', ['class' => 'linkAdmin']) !!}
+            {!! Form::open(['route' => ['posts.destroy', $post->id], 'method' => 'DELETE']) !!}
 
-                                            {!! Form::close() !!}</p>
-                                        <p></p>
-                                        <p>{!! Html::linkRoute('posts.edit', 'Edit', array($post->id), array('class' => 'linkAdmin2')) !!}</p>
+            {!! Form::submit('Delete', ['class' => 'btn btn-primary btn-block']) !!}
 
-                                    </div>
-                                </div>
+            {!! Form::close() !!}
+        </p>
+        <p>
 
-                                <span class="username"><a href="#"></a></span>
-                                <span class="description">{{ $post->title }}</span>
-                            </div>
 
-                        </div>
-                        <!-- /.box-header -->
-                        <div class="box-body">
-                            <img class="img-responsive pad pull-left" width="100" src="../dist/img/photo2.png" alt="Photo">
-                            <p>{{ substr($post->body, 0, 60) }} {{ strlen($post->body) > 60 ? "..." : "" }}</p>
-                        </div>
-                        <div class="box-footer">
 
-                            <span style="margin-right: 6px;" class="pull-right text-muted">{{ Html::linkRoute('posts.show', 'View Post', array($post->id), array('class' => 'btn btn-primary btn-block'))}}</span>
-                        </div>
-                        <!-- /.box-footer -->
-                    </div>
-                    <!-- /.box -->
-                    <?php
-                    $num++
-                    ?>
-                </div>
-
-            </div>
-        @endforeach
+        </p>
     </section>
 </div>
 @include('admin._footer')
