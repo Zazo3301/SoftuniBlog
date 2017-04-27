@@ -16,9 +16,14 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::all();
-        return view('admin.edit-posts')->withPosts($posts);
+        return view('posts.edit')->withPosts($posts);
     }
 
+    public function data() {
+        //$posts = Post::all();
+
+        //return view('posts.home')->withPosts($posts);
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -75,7 +80,6 @@ class PostController extends Controller
     public function edit($id)
     {
         $post = Post::find($id);
-
         return view('posts.edit')->withPost($post);
     }
 
