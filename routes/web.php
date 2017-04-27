@@ -1,7 +1,10 @@
 <?php
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Post;
 
 Route::get('/', function () {
-    return view('layouts.home');
+    return view('posts.home')->with('posts', Post::all());
 });
 
 Route::get('post.show/{id?}', function () {
@@ -44,6 +47,3 @@ Route::get('posts/create', function () {
     return view('posts.create');
 });
 Route::resource('posts', 'PostController');
-
-Route::get('/home', 'HomeController@index');
-
