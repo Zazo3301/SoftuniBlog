@@ -18,8 +18,9 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::orderBy('id', 'desc')->all();
-        return view('posts.edit')->withPosts($posts);
+        $posts = Post::all();
+
+        return view('admin.edit-posts')->withPosts($posts);
     }
 
     public function data() {
@@ -49,7 +50,6 @@ class PostController extends Controller
         $this->validate($request, array(
             'title' => 'required|max:255',
             'body'  => 'required',
-            'featured' => 'sometimes|image'
         ));
         //store in db
         $post = new Post;
@@ -63,7 +63,7 @@ class PostController extends Controller
             $filename = time(). '.' . $image->getClientOriginalExtension();
             $location = public_path('images/' . $filename);
 
-            Img::make($image)->save($location);
+            Img::make($image)->resize(800, 400)->save($location);
 
             $post->image = $filename;
         }
@@ -117,7 +117,7 @@ class PostController extends Controller
 
         $post->save();
 
-        return redirect()->route('admin.edit-post');
+        return redirect()->route('admin.edit-posts', $post->id);
     }
 
     /**
@@ -132,6 +132,6 @@ class PostController extends Controller
 
         $post->delete();
 
-        return redirect()->route('posts.edit');
+        return redirect()->route('posts.index');
     }
 }

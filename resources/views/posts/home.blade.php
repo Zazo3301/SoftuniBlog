@@ -15,7 +15,7 @@
           </div>
           <!-- /.box-header -->
           <div class="box-body">
-            <img style="width: 330px;" class="img-responsive pad pull-left" src="{{ asset('images/'. $post->image) }}" alt="Photo">
+            <img style="width: 330px;" class="img-responsive pad pull-left" src="../dist/img/photo2.png" alt="Photo">
             <p>{{ substr($post->body, 0, 60) }} {{ strlen($post->body) > 60 ? "..." : "" }} <a href="#">more</a></p>
           </div>
           <div class="box-footer">
