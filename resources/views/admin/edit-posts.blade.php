@@ -15,14 +15,37 @@
             display: none;
             position: absolute;
             background-color: #f9f9f9;
-            min-width: 120px;
+            min-width: 149px;
             box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
             padding: 12px 16px;
             z-index: 1;
+            margin-left: -133px;
+            margin-top: -7px;
         }
 
         .dropdown:hover .dropdown-content {
             display: block;
+        }
+
+        .linkAdmin2 {
+            cursor: pointer;
+            color: #3c8dbc;
+            background: none;
+            border: transparent;
+            margin-left: -6px;
+            -webkit-appearance: inherit !important;
+            font-size: 16px;
+            margin-left: 0 !important;
+        }
+
+        .linkAdmin {
+            cursor: pointer;
+            color: #3c8dbc;
+            background: none;
+            border: transparent;
+            margin-left: -6px;
+            -webkit-appearance: inherit !important;
+            font-size: 16px;
         }
     </style>
 </head>
@@ -30,6 +53,8 @@
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
+            <span><a href="/posts/create"> a </a></span>
+            @foreach($posts as $post)
             <?php
             $num = 13
             ?>
@@ -38,34 +63,37 @@
                     <div class="box box-widget">
                         <div class="box-header with-border">
                             <div class="user-block">
+                                {{date('M j, Y', strtotime($post->created_at )) }}
                                 <img class="img-circle " width="100" src="../dist/img/user1-128x128.jpg" alt="User Image">
 
                                 <div class="dropdown fixed-right navbar-collapse-right">
                                     <i class="fa fa-angle-down"></i>
                                     <div class="dropdown-content">
 
-                                        <p><a href="#">Delete Post</a></p>
-                                        <p><a href="#">Block User</a></p>
-                                        <p><a href="#">Edit Post</a></p>
+                                        <p>{!! Form::open(['route' => ['posts.destroy', $post->id], 'method' => 'DELETE']) !!}
+
+                                            {!! Form::submit('Delete', ['class' => 'linkAdmin']) !!}
+
+                                            {!! Form::close() !!}</p>
+                                        <p></p>
+                                        <p>{!! Html::linkRoute('posts.edit', 'Edit', array($post->id), array('class' => 'linkAdmin2')) !!}</p>
 
                                     </div>
                                 </div>
 
-
                                 <span class="username"><a href="#"></a></span>
-                                <span class="description">Author: Admin  - 7:30 PM Today</span>
+                                <span class="description">{{ $post->title }}</span>
                             </div>
 
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body">
                             <img class="img-responsive pad pull-left" width="100" src="../dist/img/photo2.png" alt="Photo">
-
-                            <p>I took this photo this morning. What do you guys think?  Description about the attachment can be placed here.Lorem Ipsum is simply dummy text of the printing and typesetting industry... <a href="#">more</a></p>
+                            <p>{{ substr($post->body, 0, 60) }} {{ strlen($post->body) > 60 ? "..." : "" }}</p>
                         </div>
                         <div class="box-footer">
 
-                            <span class="pull-right text-muted">127 likes - 3 comments</span>
+                            <span style="margin-right: 6px;" class="pull-right text-muted">{{ Html::linkRoute('posts.show', 'View Post', array($post->id), array('class' => 'btn btn-primary btn-block'))}}</span>
                         </div>
                         <!-- /.box-footer -->
                     </div>
@@ -75,49 +103,8 @@
                     ?>
                 </div>
 
-                <div class="col-md-{{$num}}">
-                    <div class="box-body">
-                        <div class="box box-widget">
-                            <div class="box-header with-border">
-                                <div class="user-block">
-                                    <img class="img-circle " width="100" src="../dist/img/user1-128x128.jpg" alt="User Image">
-
-                                    <div class="dropdown fixed-right">
-                                        <i class="fa fa-angle-down"></i>
-                                        <div class="dropdown-content">
-
-                                            <p><a href="#">Delete Post</a></p>
-                                            <p><a href="#">Block User</a></p>
-                                            <p><a href="#">Edit Post</a></p>
-
-                                        </div>
-                                    </div>
-
-
-                                    <span class="username"><a href="#"></a></span>
-                                    <span class="description">Author: Admin  - 7:30 PM Today</span>
-                                </div>
-
-                            </div>
-                            <!-- /.box-header -->
-                            <div class="box-body">
-                                <img class="img-responsive pad pull-left" width="100" src="../dist/img/photo2.png" alt="Photo">
-
-                                <p>I took this photo this morning. What do you guys think?  Description about the attachment can be placed here.Lorem Ipsum is simply dummy text of the printing and typesetting industry... <a href="#">more</a></p>
-                            </div>
-                            <div class="box-footer">
-
-                                <span class="pull-right text-muted">127 likes - 3 comments</span>
-                            </div>
-                            <!-- /.box-footer -->
-                        </div>
-                        <!-- /.box -->
-                        <?php
-                        $num++
-                        ?>
-                    </div>
-                </div>
             </div>
+                @endforeach
         </section>
     </div>
 @include('admin._footer')
