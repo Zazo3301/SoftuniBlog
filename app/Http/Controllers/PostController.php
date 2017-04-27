@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Faker\Provider\Image;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Post;
+use App\Comment;
+use Img;
 
 class PostController extends Controller
 {
@@ -15,7 +18,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::all();
+        $posts = Post::orderBy('id', 'desc')->all();
         return view('posts.edit')->withPosts($posts);
     }
 
@@ -53,6 +56,16 @@ class PostController extends Controller
         $post->title = $request->title;
         $post->body = $request->body;
 
+
+        if ($request->hasFile('featured_image')){
+            $image = $request->file('featured_image');
+            $filename = time(). '.' . $image->getClientOriginalExtension();
+            $location = public_path('images/' . $filename);
+
+            Img::make($image)->resize(800, 400)->save($location);
+
+            $post->image = $filename;
+        }
         $post->save();
 
         return redirect()->route('posts.show', $post->id);
@@ -70,7 +83,6 @@ class PostController extends Controller
         $post = Post::find($id);
         return view('posts.show')->withPost($post);
     }
-
     /**
      * Show the form for editing the specified resource.
      *
