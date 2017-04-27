@@ -13,6 +13,12 @@
     {{ $post->updated_at }}
 </p>
 <p>
+
     {!! Html::linkRoute('posts.edit', 'Edit', array($post->id), array('class' => 'btn btn-primary btn-block')) !!}
-    {!! Html::linkRoute('posts.destroy', 'Delete', array($post->id), array('class' => 'btn btn-primary btn-block')) !!}
+
+    {!! Form::open(['route' => ['posts.destroy', $post->id], 'method' => 'DELETE']) !!}
+
+    {!! Form::submit('Delete', ['class' => 'btn btn-primary btn-block']) !!}
+
+    {!! Form::close() !!}
 </p>
