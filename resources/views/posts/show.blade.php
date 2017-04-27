@@ -5,6 +5,8 @@
 <p class="lead">
     {{$post->body}}
 </p>
+<img src="{{ asset('images/'. $post->image) }}">
+
 <p>created at:
     {{ $post->created_at }}
 </p>
@@ -21,4 +23,9 @@
     {!! Form::submit('Delete', ['class' => 'btn btn-primary btn-block']) !!}
 
     {!! Form::close() !!}
+</p>
+<p>
+
+
+
 </p>

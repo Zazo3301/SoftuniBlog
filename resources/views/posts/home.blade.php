@@ -1,9 +1,7 @@
 @extends('posts.master')
 @section('content')
 
-
-@foreach($posts as $post)
-
+@foreach($posts as $post )
     <div style="display:block !important;" class="col-md-12">
       <div class="box-body">
         <div class="box box-widget">
@@ -13,7 +11,7 @@
               <span class="username"><a href="#"></a></span>
               <span class="description">{{ $post->author }}{{date('M j, Y', strtotime($post->created_at )) }}</span>
             </div>
-                <!--{{ $post->title }}-->
+                {{ $post->title }}
           </div>
           <!-- /.box-header -->
           <div class="box-body">
@@ -25,7 +23,7 @@
             <button type="button" class="btn btn-default btn-xs"></i>#Programming</button><button type="button" class="btn btn-default btn-xs"></i>#JAVA</button>
             <button type="button" class="btn btn-default btn-xs"></i>#Programming</button><button type="button" class="btn btn-default btn-xs"></i>#JAVA</button>
             <button type="button" class="btn btn-default btn-xs"></i>#Programming</button>
-            <span class="pull-right text-muted">127 likes - 3 comments</span>
+              {{ Html::linkRoute('posts.show', 'View Post', array($post->id), array('class' => 'btn btn-primary btn-block'))}}
           </div>
           <!-- /.box-footer -->
         </div>

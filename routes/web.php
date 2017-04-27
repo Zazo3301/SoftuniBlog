@@ -47,3 +47,7 @@ Route::get('posts/create', function () {
     return view('posts.create');
 });
 Route::resource('posts', 'PostController');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');
