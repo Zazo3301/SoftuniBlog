@@ -36,4 +36,13 @@ class LoginController extends Controller
     {
         $this->middleware('guest', ['except' => 'logout']);
     }
+
+
+
+//    public function users()
+//    {
+//        $user = DB::table('users')->get();
+//
+//        return view('/', ['user' => $user]);
+//    }
 }

@@ -101,7 +101,7 @@
                                             Logout
                                         </a>
 
-                                        <form id="logout-form" action="" method="POST" style="display: none;">
+                                        <form  id="logout-form" action="" method="patch" {!! (['method' => 'patch']) !!} style="display: none;">
                                             {{ csrf_field() }}
                                         </form>
             </div>
@@ -115,7 +115,7 @@
               <h3 class="box-title">About Me</h3>
             </div>
             <!-- /.box-header -->
-          
+
             <!-- /.box-body -->
           </div>
           <!-- /.box -->

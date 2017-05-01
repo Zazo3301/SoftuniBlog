@@ -55,33 +55,34 @@
     <section class="content-header">
         <!DOCTYPE html>
         <h1>
-            {{ $post->title }}
+            {!! Form::model($post, ['route' => ['posts.update', $post->id], 'method' => 'PUT', 'files' => true]) !!}
+            {{Form::text('title', null, ['class' => 'form-control'])}}
         </h1>
         <p class="lead">
-            {{$post->body}}
+            {{Form::textarea('body', null, ['class' => 'form-control'])}}
         </p>
+        <p>
+
+            {{ Form::label('featured_image', 'Update Featured Image') }}
+            {{ Form::file('featured_image') }}
+        </p>
+
         <img src="{{ asset('images/'. $post->image) }}">
 
         <p>created at:
             {{ $post->created_at }}
         </p>
-        <p>
-            updated at:
-            {{ $post->updated_at }}
+
         </p>
         <p>
 
-            {!! Html::linkRoute('posts.edit', 'Edit', array($post->id), array('class' => 'btn btn-primary btn-block')) !!}
+            {!! Html::linkRoute('posts.show', 'Cancel', array($post->id), array('class' => 'btn btn-danger btn-block')) !!}
 
-            {!! Form::open(['route' => ['posts.destroy', $post->id], 'method' => 'DELETE']) !!}
 
-            {!! Form::submit('Delete', ['class' => 'btn btn-primary btn-block']) !!}
+            {!! Form::submit('Save Changes', ['class' => 'btn btn-success btn-block']) !!}
 
-            {!! Form::close() !!}
         </p>
         <p>
-
-
 
         </p>
     </section>

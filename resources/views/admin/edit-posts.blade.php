@@ -53,8 +53,8 @@
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <span><a href="/posts/create"> a </a></span>
-            @foreach($posts as $post)
+            <span class="btn btn-primary btn-block"><a style="color:#fff; text-decoration: none; font-weight: 400;opacity: 0.98;" href="/posts/create">Add Post</a></span>
+            @foreach($posts->reverse() as $post)
             <?php
             $num = 13
             ?>
@@ -63,7 +63,7 @@
                     <div class="box box-widget">
                         <div class="box-header with-border">
                             <div class="user-block">
-                                {{date('M j, Y', strtotime($post->created_at )) }}
+                                <p style="opacity:0.4">{{date('M j, Y', strtotime($post->created_at )) }}</p>
                                 <img class="img-circle " width="100" src="../dist/img/user1-128x128.jpg" alt="User Image">
 
                                 <div class="dropdown fixed-right navbar-collapse-right">
@@ -82,14 +82,19 @@
                                 </div>
 
                                 <span class="username"><a href="#"></a></span>
-                                <span class="description">{{ $post->title }}</span>
+                                <span style="color: #444;
+    font-size: 37px;
+    font-weight: 600;
+    margin-top: 36px;
+    margin-left: 18px;
+    opacity: 0.87;" class="description">{{ $post->title }}</span>
                             </div>
 
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body">
-                            <img class="img-responsive pad pull-left" width="100" src="../dist/img/photo2.png" alt="Photo">
-                            <p>{{ substr($post->body, 0, 60) }} {{ strlen($post->body) > 60 ? "..." : "" }}</p>
+                            <img class="img-responsive pad pull-left" style="width: 344px;" src="{{ asset('images/'. $post->image) }}" alt="Photo">
+                            <p>{{ substr($post->body, 0, 700) }} {{ strlen($post->body) > 700 ? "..." : "" }}</p>
                         </div>
                         <div class="box-footer">
 

@@ -1,10 +1,10 @@
 @extends('posts.master')
 
 
-@section('content') 
+@section('content')
 <!--  start of  users component -->
 
- 
+
  <div class="nav-tabs-custom">
   <ul class="nav nav-tabs">
     <li class="active"><a href="#top" data-toggle="tab">Top Authors</a></li>
@@ -14,14 +14,14 @@
   </ul>
   <div class="tab-content">
     <div class="tab-pane active" id="top">
-      
+
 
 
     </div>
     <!-- /.tab-pane -->
     <div class="tab-pane" id="latest">
-     
-     
+
+
     </div>
     <!-- /.tab-pane -->
     <div class="tab-pane" id="random">
@@ -36,17 +36,17 @@
                       <button type="button" class="btn btn-info btn-flat">Go!</button>
                     </span>
   </div>
-  
+
   </div>
     </div>
     <!-- /.tab-pane -->
   </div>
   <!-- /.tab-content -->
  </div>
- <!-- nav-tabs-custom -->     
+ <!-- nav-tabs-custom -->
 
 <!-- USERS LIST -->
- 
+
 
 
 

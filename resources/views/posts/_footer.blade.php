@@ -8,7 +8,7 @@
         <b>Version</b> 1.0 alpha
       </div>
       <strong>Copyright &copy; 2017</strong> All rights
-      reserved.
+      reserved. &copy;aSi i Zazinga Ood
     </div>
     <!-- /.container -->
 </footer> 
