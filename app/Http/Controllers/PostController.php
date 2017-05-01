@@ -7,7 +7,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Post;
 use App\Comment;
+use Illuminate\Support\Facades\Storage;
 use Img;
+use Auth;
 
 class PostController extends Controller
 {
@@ -19,8 +21,15 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::all();
+        if(Auth::user()->email=="email@email.mail") {
 
-        return view('admin.edit-posts')->withPosts($posts);
+            return view('admin.edit-posts')->withPosts($posts);
+        }
+        else {
+
+            return redirect('/');
+        }
+
     }
 
     public function data() {
@@ -108,6 +117,7 @@ class PostController extends Controller
         $this->validate($request, array(
             'title' => 'required|max:255',
             'body'  => 'required',
+            'featured_image' => 'image',
         ));
 
         $post = Post::find($id);
@@ -115,9 +125,20 @@ class PostController extends Controller
         $post->title = $request->input('title');
         $post->body = $request->input('body');
 
+        if ($request->hasFile('featured_image')){
+            $image = $request->file('featured_image');
+            $filename = time(). '.' . $image->getClientOriginalExtension();
+            $location = public_path('images/' . $filename);
+
+            Img::make($image)->resize(800, 400)->save($location);
+
+            $post->image = $filename;
+
+        }
+
         $post->save();
 
-        return redirect()->route('admin.edit-posts', $post->id);
+        return redirect()->route('posts.show', $post->id);
     }
 
     /**
@@ -129,6 +150,9 @@ class PostController extends Controller
     public function destroy($id)
     {
         $post = Post::find($id);
+
+        Storage::delete($post->image);
+
 
         $post->delete();
 

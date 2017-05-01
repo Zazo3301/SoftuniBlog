@@ -2,6 +2,7 @@
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Post;
+
 Route::get('/', function () {
     return view('posts.home')->with('posts', Post::all());
 });
@@ -36,3 +37,29 @@ Route::get('posts/create', function () {
     return view('posts.create');
 });
 Route::resource('posts', 'PostController');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');
+
+
+Route::prefix('admin')->group(function() {
+    Route::get('/admin', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
+    Route::post('/admin', 'Auth\AdminLoginController@login')->name('admin.login.submit');
+    Route::get('/', 'AdminController@index')->name('admin.dashboard');
+});
+
+Route::get('/logout', 'Auth\LogoutController@logout');
+
+Route::get('admin', function () {
+    return view('auth.admin-login');
+});
+
+

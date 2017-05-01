@@ -82,3 +82,5 @@ Route::get('/home', 'HomeController@index');
 
 Route::resource('posts', 'PostController');
 
+Route::get('user' , 'UsersControl');
+Route::get('admin' , 'AdminControl');

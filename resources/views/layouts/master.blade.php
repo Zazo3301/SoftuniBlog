@@ -8,7 +8,7 @@
         <!-- Start Main section ( 9 in 12 - another 3 for sidebar) -->
         <div class="col-md-9">
           @yield('content')
-        </div>      
+        </div>
         <!--  end of  posts -->
         <div class="col-md-3">
          @include('layouts.sidebar');
